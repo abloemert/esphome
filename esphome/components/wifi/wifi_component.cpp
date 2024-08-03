@@ -720,6 +720,9 @@ bool WiFiComponent::can_proceed() {
 }
 void WiFiComponent::set_reboot_timeout(uint32_t reboot_timeout) { this->reboot_timeout_ = reboot_timeout; }
 bool WiFiComponent::is_connected() {
+  if (this->state_ == WIFI_COMPONENT_STATE_AP) {
+    return true;
+  }
   return this->state_ == WIFI_COMPONENT_STATE_STA_CONNECTED &&
          this->wifi_sta_connect_status_() == WiFiSTAConnectStatus::CONNECTED && !this->error_from_callback_;
 }
